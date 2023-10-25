@@ -1,8 +1,8 @@
-# 11th_study
+# 12th_study
 
 알고리즘 스터디 12주차
 
-[백준 문제집](https://www.acmicpc.net/workbook/view/17214)
+[백준 문제집](https://www.acmicpc.net/workbook/view/17214) <br/>
 [프로그래머스](https://school.programmers.co.kr/learn/courses/30/lessons/148653)
 
 # [마법의 엘리베이터]
