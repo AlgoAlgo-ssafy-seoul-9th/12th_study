@@ -14,7 +14,33 @@
 ### [민웅](<./마법의 엘리베이터/민웅.py>)
 
 ```py
+ans = float('inf')
+def bt(sto, score):
+    global ans
+    
+    if sto < 10:
+        score1 = score + int(sto)
+        score2 = score + (11-int(sto))
+        ans = min(ans, score1, score2)
+        return
+    
+    if score >= ans:
+        return
+    temp = sto % 10
+    
+    # 성구 수정
+    sto //= 10
+    bt(sto+1, score+(10-temp))
+    bt(sto, score+temp)
+    
+    
 
+def solution(storey):
+    global ans
+    
+    bt(storey, 0)
+      
+    return ans
 
 ```
 
@@ -57,6 +83,87 @@
 ## [민웅](<./틱택토/민웅.py>)
 
 ```py
+# 7682_틱택토_tiktakto
+import sys
+input = sys.stdin.readline
+dxy = [(0, 1), (0, -1), (-1, 0), (-1, 1), (-1, -1)]
+
+while True:
+    game = input().strip()
+    if game == 'end':
+        break
+
+    line1 = game[:3]
+    line2 = game[3:6]
+    line3 = game[6:]
+    game = []
+    game.append(list(line1))
+    game.append(list(line2))
+    game.append(list(line3))
+
+    cnt_x = 0
+    cnt_o = 0
+    is_x = 0
+    is_o = 0
+    for i in range(3):
+        for j in range(3):
+            now = game[i][j]
+
+            if now == 'X':
+                cnt_x += 1
+            elif now == 'O':
+                cnt_o += 1
+
+            if now != '.':
+                for d in dxy:
+                    x = i
+                    y = j
+                    check = 1
+                    while True:
+                        x = x + d[0]
+                        y = y + d[1]
+                        if check == 3:
+                            if now == 'X':
+                                is_x += 1
+                            else:
+                                is_o += 1
+
+                        if 0 <= x <= 2 and 0 <= y <= 2:
+                            if game[x][y] == now:
+                                check += 1
+                                continue
+                        else:
+                            break
+
+    if is_x and is_o:
+        print('invalid')
+        continue
+
+    if is_x and cnt_x != (cnt_o+1):
+        print('invalid')
+        continue
+
+    if is_o and cnt_x != cnt_o:
+        print('invalid')
+        continue
+
+    if abs(cnt_o - cnt_x) >= 2:
+        print('invalid')
+        continue
+
+    if cnt_x < cnt_o:
+        print('invalid')
+        continue
+
+    if is_o and cnt_x > cnt_o:
+        print('invalid')
+        continue
+
+    if (cnt_x + cnt_o) != 9 and not is_x and not is_o:
+        print('invalid')
+        continue
+
+    print('valid')
 
 ```
 
