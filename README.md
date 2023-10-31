@@ -39,7 +39,26 @@
 ### [성구](<./마법의 엘리베이터/성구.py>)
 
 ```py
+def solution(storey:int) -> int:
+    answer = 0
+    while storey:
+        one = storey % 10
+        if one > 5:
+            answer += 10 - one
+            storey += 10
+        elif one < 5:
+            answer += one
+        else:
+            ten = (storey // 10) % 10
+            if ten >= 5:
+                answer += 10 - one
+                storey += 10
+            elif ten < 5:
+                answer += one
 
+
+        storey //= 10
+    return answer
 ```
 
 </div>
@@ -54,13 +73,13 @@
 <summary>접기/펼치기</summary>
 <div markdown="1">
 
-## [민웅](<./틱택토/민웅.py>)
+## [민웅](./틱택토/민웅.py)
 
 ```py
 
 ```
 
-## [병국](<./틱택토/병국.py>)
+## [병국](./틱택토/병국.py)
 
 ```py
 
@@ -137,21 +156,64 @@ for i in range(100000):
 
 ```
 
-## [상미](<./틱택토/상미.py>)
+## [상미](./틱택토/상미.py)
 
 ```py
 
 ```
 
-## [서희](<./틱택토/서희.py>)
+## [서희](./틱택토/서희.py)
 
 ```py
 
 ```
 
-## [성구](<./틱택토/성구.py>)
+## [성구](./틱택토/성구.py)
 
 ```py
+# 7682 틱택토
+import sys
+
+input = sys.stdin.readline
+
+
+def check(line: str, S: str) -> bool:
+    for i in range(3):
+        # 세로 체크
+        if line[i] == line[i + 3] == line[i + 6] == S:
+            return True
+        # 가로 체크
+        if line[i * 3] == line[i * 3 + 1] == line[i * 3 + 2] == S:
+            return True
+    # 대각선 체크
+    if line[0] == line[4] == line[8] == S or line[2] == line[4] == line[6] == S:
+        return True
+    return False
+
+
+def solution(line: str, o_cnt: int, x_cnt: int) -> bool:
+    if x_cnt > o_cnt + 1 or o_cnt > x_cnt:
+        return False
+    # 3가지 이외에는 종료될 수가 없음
+    if o_cnt == x_cnt and check(line, "O") and not check(line, "X"):
+        return True
+    if o_cnt + 1 == x_cnt and check(line, "X") and not check(line, "O"):
+        return True
+    if o_cnt == 4 and x_cnt == 5 and not check(line, "O"):
+        return True
+    return False
+
+
+if __name__ == "__main__":
+    while True:
+        line = input().strip()
+        # 갯수 체크
+        o_cnt = line.count("O")
+        x_cnt = line.count("X")
+        if line == "end":
+            break
+        # 마지막이 가능하면 valid 아니면 invalid
+        print("valid") if solution(line, o_cnt, x_cnt) else print("invalid")
 
 ```
 
@@ -167,32 +229,32 @@ for i in range(100000):
 <summary>접기/펼치기</summary>
 <div markdown="1">
 
-## [민웅](<./등산마니아/민웅.py>)
+## [민웅](./등산마니아/민웅.py)
 
 ```py
 
 
 ```
 
-## [병국](<./등산마니아/병국.py>)
+## [병국](./등산마니아/병국.py)
 
 ```py
 
 ```
 
-## [상미](<./등산마니아/상미.py>)
+## [상미](./등산마니아/상미.py)
 
 ```py
 
 ```
 
-## [서희](<./등산마니아/서희.py>)
+## [서희](./등산마니아/서희.py)
 
 ```py
 
 ```
 
-## [성구](<./등산마니아/성구.py>)
+## [성구](./등산마니아/성구.py)
 
 ```py
 
@@ -201,4 +263,3 @@ for i in range(100000):
 </div>
 
 </details>
-
