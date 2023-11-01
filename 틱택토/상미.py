@@ -1,4 +1,3 @@
-
 three = [[0,1,2], [3,4,5], [6,7,8], [0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
 
 while True:
@@ -21,18 +20,36 @@ while True:
         if x != 5:
             answer = 'invalid'
         else:
-            if index_o in three:
-                answer = 'invalid'
+            for t in three:
+                cnt = 0
+                for num in t:
+                    if num in index_o:
+                        cnt += 1
+                if cnt == 3:
+                    answer = 'invalid'
 
     # 9칸 안 찼으면
     else:
         if x-o <= 1:
             if x > o:
-                if index_o in three:
-                    answer = 'invalid'
+                for t in three:
+                    cnt = 0
+                    for num in t:
+                        if num in index_o:
+                            cnt += 1
+                    if cnt == 3:
+                        answer = 'invalid'
             elif x == o:
-                if index_x not in three and index_o not in three:
-                    answer = 'invalid'
+                for t in three:
+                    cnt_o = 0
+                    cnt_x = 0
+                    for num in t:
+                        if num in index_o:
+                            cnt_o += 1
+                        if num in index_x:
+                            cnt_x += 1
+                    if cnt_x != 3 and cnt_o != 3:
+                        answer = 'invalid'
             else:
                 answer = 'invalid'
         else:
