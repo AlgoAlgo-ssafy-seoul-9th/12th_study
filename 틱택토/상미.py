@@ -8,20 +8,25 @@ while True:
         break
     x = arr.count('X')
     o = arr.count('O')
+    index_x = []
+    index_o = []
+    for i in range(9):
+        if arr[i] =='O':
+            index_o.append(i)
+        else:
+            index_x.append(i)
+            
     # 9칸 모두 찼으면
     if x+o == 9:
         if x != 5:
             answer = 'invalid'
+        else:
+            if index_o in three:
+                answer = 'invalid'
+
     # 9칸 안 찼으면
     else:
         if x-o <= 1:
-            index_x = []
-            index_o = []
-            for i in range(9):
-                if arr[i] =='O':
-                    index_o.append(i)
-                else:
-                    index_x.append(i)
             if x > o:
                 if index_o in three:
                     answer = 'invalid'
