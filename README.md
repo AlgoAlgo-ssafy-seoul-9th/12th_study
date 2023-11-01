@@ -17,29 +17,29 @@
 ans = float('inf')
 def bt(sto, score):
     global ans
-    
+
     if sto < 10:
         score1 = score + int(sto)
         score2 = score + (11-int(sto))
         ans = min(ans, score1, score2)
         return
-    
+
     if score >= ans:
         return
     temp = sto % 10
-    
+
     # 성구 수정
     sto //= 10
     bt(sto+1, score+(10-temp))
     bt(sto, score+temp)
-    
-    
+
+
 
 def solution(storey):
     global ans
-    
+
     bt(storey, 0)
-      
+
     return ans
 
 ```
@@ -53,7 +53,27 @@ def solution(storey):
 ### [상미](<./마법의 엘리베이터/상미.py>)
 
 ```py
-
+def solution(storey):
+    answer = 0
+    while storey:
+        val = storey % 10
+        if (storey//10)%10 >= 5:
+            if val >= 5:
+                storey = storey+(10-val)
+                answer += 10-val
+            else:
+                storey = storey-val
+                answer += val
+            storey = storey//10
+        else:
+            if val > 5:
+                storey = storey+(10-val)
+                answer += 10-val
+            else:
+                storey = storey-val
+                answer += val
+            storey = storey//10
+    return answer
 ```
 
 ### [서희](<./마법의 엘리베이터/서희.py>)
@@ -266,6 +286,42 @@ for i in range(100000):
 ## [상미](./틱택토/상미.py)
 
 ```py
+
+three = [[0,1,2], [3,4,5], [6,7,8], [0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
+
+while True:
+    answer = 'valid'
+    arr = input()
+    if arr == 'end':
+        break
+    x = arr.count('X')
+    o = arr.count('O')
+    # 9칸 모두 찼으면
+    if x+o == 9:
+        if x != 5:
+            answer = 'invalid'
+    # 9칸 안 찼으면
+    else:
+        if x-o <= 1:
+            index_x = []
+            index_o = []
+            for i in range(9):
+                if arr[i] =='O':
+                    index_o.append(i)
+                else:
+                    index_x.append(i)
+            if x > o:
+                if index_o in three:
+                    answer = 'invalid'
+            elif x == o:
+                if index_x not in three and index_o not in three:
+                    answer = 'invalid'
+            else:
+                answer = 'invalid'
+        else:
+            answer = 'invalid'
+    print(answer)
+
 
 ```
 
