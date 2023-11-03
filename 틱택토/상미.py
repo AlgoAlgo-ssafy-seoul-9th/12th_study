@@ -12,7 +12,7 @@ while True:
     for i in range(9):
         if arr[i] =='O':
             index_o.append(i)
-        else:
+        elif arr[i] =='X':
             index_x.append(i)
             
     # 9칸 모두 찼으면
@@ -33,11 +33,18 @@ while True:
         if x-o <= 1:
             if x > o:
                 for t in three:
-                    cnt = 0
+                    cnt_o = 0
+                    cnt_x = 0
                     for num in t:
                         if num in index_o:
-                            cnt += 1
-                    if cnt == 3:
+                            cnt_o += 1
+                        if num in index_x:
+                            cnt_x += 1
+                    # o가 빙고가 되어있는 상태면 안 됨
+                
+                    if cnt_x == 3 and cnt_o != 3:
+                        answer = 'valid'
+                    else:
                         answer = 'invalid'
             elif x == o:
                 for t in three:
@@ -46,9 +53,13 @@ while True:
                     for num in t:
                         if num in index_o:
                             cnt_o += 1
+                            if cnt_o ==3:
+                                break
                         if num in index_x:
                             cnt_x += 1
-                    if cnt_x != 3 and cnt_o != 3:
+                            if cnt_x ==3:
+                                break
+                    if cnt_o != 3 and cnt_x ==3:
                         answer = 'invalid'
             else:
                 answer = 'invalid'
